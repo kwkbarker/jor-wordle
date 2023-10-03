@@ -30,7 +30,9 @@ const GuessWord = ({
   return (
     <form className="guess-input-wrapper" onSubmit={handleSubmit}>
       <input type="hidden" value="stop-autocomplete" />
-      <label htmlFor="guess-input">Enter Guess:</label>
+      <label htmlFor="guess-input" className="label">
+        Enter Guess:
+      </label>
       <input
         id="guess-input"
         type="text"

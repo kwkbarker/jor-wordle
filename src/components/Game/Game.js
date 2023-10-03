@@ -65,7 +65,13 @@ function Game() {
           entryList.length > 5
         }
       />
-      <KeyBoard letterList={letterList} />
+      <KeyBoard
+        letterList={letterList}
+        entry={entry}
+        setEntry={setEntry}
+        entryList={entryList}
+        setEntryList={setEntryList}
+      />
     </>
   );
 }

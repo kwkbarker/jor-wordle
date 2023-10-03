@@ -52,13 +52,15 @@ button {
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  background-color: var(--color-gray-500);
 }
 
 header {
   display: flex;
   height: var(--header-height);
   border-bottom: 1px solid var(--color-gray-700);
-  color: var(--color-gray-300);
+  color: var(--color-gray-900);
+  background-color: var(--color-gray-300);
 }
 
 header .side {
@@ -103,6 +105,9 @@ h1 {
   gap: 4px;
   margin-bottom: 4px;
 }
+.label {
+  color: var(--color-gray-900);
+}
 
 .cell {
   position: relative;
@@ -118,18 +123,23 @@ h1 {
 .letter {
   position: relative;
   width: 40px;
+  height: 40px;
   display: grid;
   place-content: center;
   aspect-ratio: 1 / 1;
   border: 1px solid var(--color-gray-700);
-  border-radius: var(--radius);
+  border-radius: 2;
   font-size: 1rem;
-  padding: 5px 5px;
   margin: 5px;
   background-color: lightgray;
 }
 
+.submit {
+  width: 80px;
+}
+
 .keyboard-row {
+  justify-content: center;
   display: flex;
   flex-direction: row;
 }
