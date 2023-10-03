@@ -40,6 +40,14 @@ button {
   color: inherit;
 }
 
+.new-game {
+  padding: 10px;
+  margin: 20px;
+  background-color: var(--color-warning);
+  border: 2px black;
+  border-radius: 5px;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
