@@ -4,6 +4,7 @@ import React from "react";
 import { sample } from "../../utils";
 import { WORDS } from "../../data";
 import GameReset from "../GameReset/GameReset";
+import KeyBoard from "../KeyBoard/KeyBoard";
 
 function Game() {
   // Pick a random word on every pageload.
@@ -19,6 +20,12 @@ function Game() {
   // Save entries and entered letters.
   const [entry, setEntry] = React.useState("");
   const [entryList, setEntryList] = React.useState([]);
+  const alpha = Array.from(Array(26)).map((e, i) =>
+    String.fromCharCode(i + 65)
+  );
+  const [letterList, setLetterList] = React.useState(
+    alpha.map((letter) => ({ letter, status: "" }))
+  );
 
   return (
     <>
@@ -28,7 +35,7 @@ function Game() {
             <strong>Congratulations!</strong> Got it in{" "}
             <strong>{entryList.length} guesses</strong>.
           </p>
-          <GameReset newGame={newGame}></GameReset>
+          <GameReset newGame={newGame} />
         </div>
       )}
       {entryList.length > 5 && (
@@ -36,10 +43,15 @@ function Game() {
           <p>
             Sorry, the correct answer is <strong>{answer}</strong>.
           </p>
-          <GameReset newGame={newGame}></GameReset>
+          <GameReset newGame={newGame} />
         </div>
       )}
-      <Guess entryList={entryList} answer={answer}></Guess>
+      <Guess
+        entryList={entryList}
+        answer={answer}
+        letterList={letterList}
+        setLetterList={setLetterList}
+      />
       <GuessWord
         entry={entry}
         setEntry={setEntry}
@@ -49,7 +61,8 @@ function Game() {
           entryList.filter((x) => x.entry == answer).length > 0 ||
           entryList.length > 5
         }
-      ></GuessWord>
+      />
+      <KeyBoard letterList={letterList} />
     </>
   );
 }
