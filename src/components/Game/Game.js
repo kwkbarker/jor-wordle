@@ -15,17 +15,20 @@ function Game() {
     setEntry("");
     setEntryList([]);
     setAnswer(sample(WORDS));
+    setLetterList(letterListReset());
+  }
+
+  function letterListReset() {
+    const alpha = Array.from(Array(26)).map((e, i) =>
+      String.fromCharCode(i + 65)
+    );
+    return alpha.map((letter) => ({ letter, status: "" }));
   }
 
   // Save entries and entered letters.
   const [entry, setEntry] = React.useState("");
   const [entryList, setEntryList] = React.useState([]);
-  const alpha = Array.from(Array(26)).map((e, i) =>
-    String.fromCharCode(i + 65)
-  );
-  const [letterList, setLetterList] = React.useState(
-    alpha.map((letter) => ({ letter, status: "" }))
-  );
+  const [letterList, setLetterList] = React.useState(letterListReset());
 
   return (
     <>
@@ -38,7 +41,7 @@ function Game() {
           <GameReset newGame={newGame} />
         </div>
       )}
-      {entryList.length > 5 && (
+      {entryList.length > 6 && (
         <div class="sad banner">
           <p>
             Sorry, the correct answer is <strong>{answer}</strong>.
