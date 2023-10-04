@@ -5,16 +5,19 @@ import { sample } from "../../utils";
 import { WORDS } from "../../data";
 import GameReset from "../GameReset/GameReset";
 import KeyBoard from "../KeyBoard/KeyBoard";
+import Banner from "../Banner/Banner";
 
 function Game() {
   // Pick a random word on every pageload.
   const [answer, setAnswer] = React.useState(sample(WORDS));
+
   // Reset game.
   function newGame() {
     setEntry("");
     setEntryList([]);
     setAnswer(sample(WORDS));
     setLetterList(letterListReset());
+    setGameStatus("running");
   }
 
   function letterListReset() {
@@ -28,28 +31,40 @@ function Game() {
   const [entry, setEntry] = React.useState("");
   const [entryList, setEntryList] = React.useState([]);
   const [letterList, setLetterList] = React.useState(letterListReset());
+  const [gameStatus, setGameStatus] = React.useState("running");
 
   return (
     <>
-      {entryList.filter((x) => x.entry == answer).length > 0 && (
-        <div class="happy banner">
-          <p>
-            <strong>Congratulations!</strong> Got it in{" "}
-            <strong>
-              {entryList.length} {entryList.length === 1 ? "guess" : "guesses"}
-            </strong>
-            .
-          </p>
-          <GameReset newGame={newGame} />
-        </div>
+      {gameStatus === "won" && (
+        <Banner
+          status="happy"
+          children={
+            <>
+              <p>
+                <strong>Congratulations!</strong> Got it in{" "}
+                <strong>
+                  {entryList.length}{" "}
+                  {entryList.length === 1 ? "guess" : "guesses"}
+                </strong>
+                .
+              </p>
+              <GameReset newGame={newGame} />
+            </>
+          }
+        />
       )}
-      {entryList.length > 6 && (
-        <div class="sad banner">
-          <p>
-            Sorry, the correct answer is <strong>{answer}</strong>.
-          </p>
-          <GameReset newGame={newGame} />
-        </div>
+      {gameStatus === "lost" && (
+        <Banner
+          status="sad"
+          children={
+            <>
+              <p>
+                Sorry, the correct answer is <strong>{answer}</strong>.
+              </p>
+              <GameReset newGame={newGame} />
+            </>
+          }
+        />
       )}
       <Guess
         entryList={entryList}
@@ -66,6 +81,8 @@ function Game() {
           entryList.filter((x) => x.entry == answer).length > 0 ||
           entryList.length > 5
         }
+        answer={answer}
+        setGameStatus={setGameStatus}
       />
       <KeyBoard
         letterList={letterList}

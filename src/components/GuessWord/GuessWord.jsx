@@ -6,6 +6,8 @@ const GuessWord = ({
   entryList,
   setEntryList,
   disabled = false,
+  answer,
+  setGameStatus,
 }) => {
   function handleInput(e) {
     // Restrict to 5 letters, make uppercase.
@@ -26,6 +28,12 @@ const GuessWord = ({
     // Add word to entries.
     const newList = [...entryList, { id: Math.random(), entry: entry }];
     setEntryList(newList);
+
+    if (entry == answer) {
+      setGameStatus("won");
+    } else if (newList.length === 6) {
+      setGameStatus("lost");
+    }
   }
   return (
     <form className="guess-input-wrapper" onSubmit={handleSubmit}>
@@ -40,7 +48,7 @@ const GuessWord = ({
         disabled={disabled}
         value={entry}
         autoComplete="off"
-        focused
+        autoFocus
       />
     </form>
   );

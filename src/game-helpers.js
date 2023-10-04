@@ -14,7 +14,6 @@ export function checkGuess(guess, answer) {
 
   const guessChars = guess.toUpperCase().split("");
   const answerChars = answer.split("");
-  const solvedChars = [];
 
   const result = [];
 
@@ -25,7 +24,6 @@ export function checkGuess(guess, answer) {
         letter: guessChars[i],
         status: "correct",
       };
-      solvedChars.push(answerChars[i]);
       answerChars[i] = SOLVED_CHAR;
       guessChars[i] = SOLVED_CHAR;
     }
@@ -44,12 +42,7 @@ export function checkGuess(guess, answer) {
     );
     if (misplacedIndex >= 0) {
       status = "misplaced";
-      solvedChars.push(answerChars[misplacedIndex]);
       answerChars[misplacedIndex] = SOLVED_CHAR;
-    }
-
-    if (solvedChars.includes(guessChars[i])) {
-      status = "misplaced";
     }
 
     result[i] = {
