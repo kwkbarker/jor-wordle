@@ -9,7 +9,6 @@ import KeyBoard from "../KeyBoard/KeyBoard";
 function Game() {
   // Pick a random word on every pageload.
   const [answer, setAnswer] = React.useState(sample(WORDS));
-
   // Reset game.
   function newGame() {
     setEntry("");
@@ -36,7 +35,10 @@ function Game() {
         <div class="happy banner">
           <p>
             <strong>Congratulations!</strong> Got it in{" "}
-            <strong>{entryList.length} guesses</strong>.
+            <strong>
+              {entryList.length} {entryList.length === 1 ? "guess" : "guesses"}
+            </strong>
+            .
           </p>
           <GameReset newGame={newGame} />
         </div>

@@ -40,6 +40,7 @@ const GuessWord = ({
         disabled={disabled}
         value={entry}
         autoComplete="off"
+        focused
       />
     </form>
   );
